@@ -747,3 +747,158 @@ body.preloader-site {
   max-height: 200px; /* ปรับขนาดความสูงตามความเหมาะสม */
   vertical-align: middle;
 }
+
+
+
+/* ============================================================
+   ✨ WEDDING ENHANCEMENT CSS v2
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --pink-deep:  #996E6D;
+  --pink-mid:   #BC8887;
+  --pink-light: #EDD2D1;
+  --pink-pale:  #F4E2E2;
+  --gold:       #C9A96E;
+  --gold-light: #E8D5A3;
+  --shadow:     0 8px 32px rgba(153,110,109,0.18);
+}
+
+/* ── HERO shimmer + title glow ── */
+.hero { position: relative; }
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,169,110,0.08) 0%, transparent 50%, rgba(201,169,110,0.06) 100%);
+  pointer-events: none;
+}
+.hero .title {
+  text-shadow: 0 2px 20px rgba(201,169,110,0.5), 0 0 40px rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+}
+.hero .subtitle { text-shadow: 0 1px 8px rgba(0,0,0,0.3); letter-spacing: 1px; }
+
+/* ── COUNTDOWN — frosted glass boxes ── */
+ul#hitungmundur { display: flex; justify-content: center; align-items: flex-end; gap: 0; list-style: none; margin: 24px auto; padding: 0; }
+ul#hitungmundur li { display: inline-block; }
+ul#hitungmundur li:not(.separator) {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 12px;
+  padding: 10px 18px 8px;
+  margin: 0 6px;
+  backdrop-filter: blur(4px);
+  min-width: 64px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+ul#hitungmundur li span { font-size: 2.4rem !important; font-weight: 700; line-height: 1; color: #fff; display: block; text-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+ul#hitungmundur li p { font-size: 0.7rem !important; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 4px; }
+ul#hitungmundur li.separator { font-size: 2rem; color: rgba(255,255,255,0.7); line-height: 1; padding-bottom: 20px; margin: 0 2px; }
+
+/* ── SECTION TITLES — เส้นทองขนาบ ── */
+.section-title {
+  position: relative;
+  display: block !important;    /* แก้จาก inline-block เป็น block */
+  width: fit-content;           /* เพิ่มบรรทัดนี้: ให้กล่องกว้างพอดีกับคำ */
+  margin: 0 auto;               /* เพิ่มบรรทัดนี้: ดันให้อยู่กึ่งกลางหน้าจอ */
+  font-family: 'Cormorant Garamond', 'Noto Serif Lao', serif !important;
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+  color: var(--pink-deep) !important;
+  letter-spacing: 2px !important;
+  text-transform: none !important;
+  padding-bottom: 20px !important;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+
+/* ── BACKGROUNDS — warm gradient ── */
+.main-content .section-dark    { background: linear-gradient(160deg, #F9ECEC 0%, #F4E2E2 60%, #EDD2D1 100%); border-top: 1px solid rgba(201,169,110,0.15); border-bottom: 1px solid rgba(201,169,110,0.15); }
+.main-content .section-darker  { background: linear-gradient(160deg, #EDD2D1 0%, #E5C8C7 100%); }
+.main-content .section-light   { position: relative; }
+.main-content .section-light::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold-light), transparent); }
+
+/* ── FAMILY HEADING gold ── */
+.family-heading { color: var(--gold) !important; font-family: 'Cormorant Garamond', serif !important; font-size: clamp(0.75rem, 2vw, 1.1rem) !important; letter-spacing: 1px; font-style: italic; }
+
+/* ── COUPLE NAMES glow ── */
+.couple-name-text, .nama-lengkap, .couple-name-card { text-shadow: 0 2px 12px rgba(153,110,109,0.2); }
+.nama-lengkap { font-family: 'Cormorant Garamond', 'Noto Serif Lao', serif !important; }
+
+/* ── BUTTONS ── */
+.btn-cta {
+  background: linear-gradient(135deg, var(--pink-deep) 0%, #b57877 100%) !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(153,110,109,0.4) !important;
+  letter-spacing: 1px;
+  transition: all 0.3s ease !important;
+  position: relative; overflow: hidden;
+}
+.btn-cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
+.btn-cta:hover::before { left: 150%; }
+.btn-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 10px 28px rgba(153,110,109,0.5) !important; background: linear-gradient(135deg, #b57877 0%, var(--pink-deep) 100%) !important; }
+
+.btn-whatsapp { background: linear-gradient(135deg, #43b344 0%, #5dc95e 100%) !important; border: none !important; box-shadow: 0 6px 20px rgba(67,179,68,0.35) !important; transition: all 0.3s ease !important; }
+.btn-whatsapp:hover { transform: translateY(-2px) !important; box-shadow: 0 10px 28px rgba(67,179,68,0.45) !important; }
+
+/* ── QR CARDS ── */
+.qr-card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; border: 1px solid var(--gold-light) !important; }
+.qr-card:hover { transform: translateY(-6px) !important; box-shadow: 0 16px 40px rgba(201,169,110,0.25) !important; }
+
+/* ── FOTO TILES hover zoom ── */
+.tile.is-child[class*="foto"] { transition: transform 0.35s ease, box-shadow 0.35s ease !important; border-radius: 12px !important; overflow: hidden; }
+.tile.is-child[class*="foto"]:hover { transform: scale(1.03) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.3) !important; }
+.title-foto { font-family: 'Cormorant Garamond', serif !important; font-size: 1.4rem !important; font-style: italic; letter-spacing: 1px; color: #fff !important; text-shadow: 0 2px 8px rgba(0,0,0,0.6) !important; }
+
+/* ── MAP ── */
+.section-map iframe { border-radius: 12px !important; box-shadow: var(--shadow) !important; }
+
+/* ── FOOTER ── */
+.footer { background: linear-gradient(135deg, var(--pink-mid) 0%, var(--pink-deep) 100%) !important; padding: 20px 10px !important; }
+
+/* ── PRELOADER pulse ── */
+.preloader img { animation: pulse-pre 1.2s ease-in-out infinite; }
+@keyframes pulse-pre { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.12);opacity:0.8} }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; background: var(--pink-pale); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--pink-mid), var(--gold)); border-radius: 4px; }
+
+/* ── NAV underline gold ── */
+.hero-menu-desktop ul li a { position: relative; transition: color 0.2s ease; }
+.hero-menu-desktop ul li a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s ease; }
+.hero-menu-desktop ul li a:hover::after, .hero-menu-desktop ul li.is-active a::after { width: 100%; }
+
+/* ── DIVIDER LINE gold diamond ── */
+.divider-line { border-top: 1px solid var(--gold-light) !important; position: relative; }
+.divider-line::before { content: '♦'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 0.9rem; background: white; padding: 0 6px; }
+
+/* ── RSVP form ── */
+.select select, .textarea { border-color: var(--pink-light) !important; border-radius: 12px !important; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.select select:focus, .textarea:focus { border-color: var(--pink-mid) !important; box-shadow: 0 0 0 3px rgba(188,136,135,0.2) !important; }
+
+/* ── BADSEUN CARD ── */
+.badseun-card { box-shadow: 0 12px 40px rgba(153,110,109,0.18), 0 2px 8px rgba(201,169,110,0.12) !important; background: linear-gradient(160deg,#fff9f9 0%,#fff 60%,#fffaf5 100%) !important; }
+
+/* ── TANGGAL (date) ── */
+.tanggal-angka { color: var(--pink-deep); text-shadow: 2px 4px 0 rgba(201,169,110,0.25); }
+.waktu.tanggal-hari, .waktu.tanggal-bulan { color: var(--pink-mid); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  ul#hitungmundur li:not(.separator) { padding: 8px 10px 6px; min-width: 52px; margin: 0 3px; border-radius: 10px; }
+  ul#hitungmundur li span { font-size: 1.8rem !important; }
+  .section-title { font-size: 1.3rem !important; letter-spacing: 1px !important; }
+  .tanggal-angka { font-size: 3rem !important; }
+}
