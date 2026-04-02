@@ -921,41 +921,48 @@ article.tile.is-child {
 }
 
 .foto1 {
-  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.25), rgba(30, 10, 10, 0.8)), url("../image/beatriz-perez-moya-M2T1j-6Fn8w-unsplash.jpg");
+  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.11), rgba(30, 10, 10, 0)), url("../image/03.png");
 }
 
 .foto2 {
-  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.25), rgba(30, 10, 10, 0.8)), url("../image/evelina-friman-hw_sKmjb0ns-unsplash.jpg");
+  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.11), rgba(30, 10, 10, 0)), url("../image/04.png");
 }
 
 .foto3 {
-  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.25), rgba(30, 10, 10, 0.8)), url("../image/jeremy-wong-weddings-464ps_nOflw-unsplash.jpg");
+  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.11), rgba(30, 10, 10, 0)), url("../image/01.png");
   background-position: top;
 }
 
 .foto4 {
-  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.25), rgba(30, 10, 10, 0.8)), url("../image/jeremy-wong-weddings-K8KiCHh4WU4-unsplash.jpg");
+  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.11), rgba(30, 10, 10, 0)), url("../image/02.png");
   background-position: top;
 }
 
 .foto5 {
-  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.25), rgba(30, 10, 10, 0.8)), url("../image/nathan-dumlao-5BB_atDT4oA-unsplash.jpg");
+  background-image: linear-gradient(160deg,  rgba(80, 20, 20, 0.11), rgba(30, 10, 10, 0)), url("../image/05.png");
 }
 
 .foto6 {
-  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.25), rgba(30, 10, 10, 0.8)), url("../image/samantha-gades-x40Q9jrEVT0-unsplash.jpg");
+  background-image: linear-gradient(160deg, rgba(80, 20, 20, 0.11), rgba(30, 10, 10, 0)), url("../image/07.png");
 }
 
 .title-foto {
   font-family: 'Cormorant Garamond', serif !important;
   font-size: 1.35rem !important;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 600; /* ปรับให้ตัวหนาขึ้นนิดนึงจะได้อ่านง่าย */
   text-align: left;
-  color: rgba(255, 255, 255, 0.95) !important;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  color: #ffffff !important; /* เปลี่ยนเป็นสีขาวล้วน 100% */
+  
+  /* เพิ่มเงาซ้อนกัน 3 ชั้น ให้ตัวหนังสือลอยเด่นขึ้นมาจากรูป */
+  text-shadow: 
+    0px 2px 4px rgba(0, 0, 0, 0.9),   /* ขอบเงาเข้มๆ ตีขอบตัวหนังสือ */
+    0px 5px 15px rgba(0, 0, 0, 0.8),  /* เงากระจายระยะกลาง */
+    0px 0px 25px rgba(0, 0, 0, 1) !important; /* เงาฟุ้งๆ วงกว้าง รองพื้นด้านหลัง */
+    
   letter-spacing: 0.5px;
 }
+
 
 .subtitle-foto {
   font-family: 'Noto Sans Lao', sans-serif;
@@ -963,8 +970,13 @@ article.tile.is-child {
   font-size: 0.9rem;
   margin-top: 8px;
   text-align: left;
-  color: rgba(255, 255, 255, 0.75);
+  color: #ffffff; /* เปลี่ยนเป็นสีขาวล้วน 100% */
   line-height: 1.5;
+  
+  /* เพิ่มเงาให้ข้อความบรรทัดล่างด้วย */
+  text-shadow: 
+    0px 2px 4px rgba(0, 0, 0, 0.9), 
+    0px 0px 15px rgba(0, 0, 0, 0.8);
 }
 
 /* ══════════════════════════════════════════
@@ -1434,3 +1446,5 @@ article.tile.is-child {
     display: block !important;
   }
 }
+
+
