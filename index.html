@@ -132,250 +132,6 @@
   <audio id="wedding-music" loop>
     <source src="music/music.mp3#t=23" type="audio/mpeg">
   </audio>
-
-  <!-- ===== VINYL RECORD PLAYER ===== -->
-  <style>
-    /* -- Vinyl wrapper -- */
-    #vinyl-player {
-      position: fixed;
-      bottom: 22px;
-      left: 18px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      user-select: none;
-    }
-
-    /* -- popup menu (hidden by default) -- */
-    #vinyl-menu {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(12px) scale(0.9);
-      pointer-events: none;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    #vinyl-menu.open {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: all;
-    }
-    .vinyl-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      backdrop-filter: blur(6px);
-    }
-    .vinyl-btn:hover {
-      transform: scale(1.15);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    }
-    #btn-playpause {
-      background: linear-gradient(135deg, #996E6D, #BC8887);
-      color: white;
-    }
-    #btn-stop {
-      background: linear-gradient(135deg, #c28285, #d4a5a4);
-      color: white;
-    }
-    #btn-mute {
-      background: linear-gradient(135deg, #C9A96E, #E8D5A3);
-      color: #5a3e00;
-    }
-
-    /* -- record disc -- */
-    #vinyl-disc {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      cursor: pointer;
-      position: relative;
-      background:
-        radial-gradient(circle at 50% 50%, #fff 0%, #fff 8%, transparent 8%),
-        radial-gradient(circle at 50% 50%, #C9A96E 0%, #C9A96E 12%, transparent 12%),
-        repeating-radial-gradient(
-          circle at 50% 50%,
-          #1a0a0a 0px, #1a0a0a 3px,
-          #2e1515 3px, #2e1515 6px,
-          #1a0a0a 6px, #1a0a0a 9px,
-          #3a1a1a 9px, #3a1a1a 12px
-        );
-      box-shadow:
-        0 0 0 3px #C9A96E,
-        0 0 0 5px #996E6D,
-        0 8px 24px rgba(0,0,0,0.5),
-        inset 0 0 16px rgba(0,0,0,0.4);
-      transition: box-shadow 0.3s ease;
-    }
-    #vinyl-disc:hover {
-      box-shadow:
-        0 0 0 3px #E8D5A3,
-        0 0 0 6px #C9A96E,
-        0 10px 30px rgba(201,169,110,0.5),
-        inset 0 0 16px rgba(0,0,0,0.4);
-    }
-    /* label sticker in center */
-    #vinyl-disc::after {
-      content: '❤️';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 22px;
-      height: 22px;
-      background: radial-gradient(circle, #f4e2e200, #edd2d100);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 700;
-      color: #996E6D;
-      letter-spacing: 0.5px;
-      line-height: 1;
-      text-align: center;
-      padding-top: 6px;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
-    }
-
-    /* spin animation */
-    @keyframes spin-vinyl {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    #vinyl-disc.spinning {
-      animation: spin-vinyl 3s linear infinite;
-    }
-    #vinyl-disc.spinning::after {
-      /* counter-rotate the label so text stays readable */
-      animation: spin-vinyl 3s linear infinite reverse;
-    }
-
-    /* glow pulse when playing */
-    @keyframes glow-pulse {
-      0%, 100% { box-shadow: 0 0 0 3px #C9A96E, 0 0 0 5px #996E6D, 0 8px 24px rgba(0,0,0,0.5), inset 0 0 16px rgba(0,0,0,0.4); }
-      50%       { box-shadow: 0 0 0 4px #E8D5A3, 0 0 0 8px #C9A96E, 0 12px 32px rgba(201,169,110,0.6), inset 0 0 16px rgba(0,0,0,0.4); }
-    }
-    #vinyl-disc.spinning {
-      animation: spin-vinyl 3s linear infinite, glow-pulse 2s ease-in-out infinite;
-    }
-
-    /* tooltip label */
-    #vinyl-tip {
-      font-size: 0.62rem;
-      color: #996E6D;
-      margin-top: 4px;
-      background: rgba(255,255,255,0.85);
-      padding: 2px 7px;
-      border-radius: 20px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 8px rgba(153,110,109,0.2);
-      backdrop-filter: blur(4px);
-      transition: opacity 0.3s;
-    }
-  </style>
-
-  <div id="vinyl-player">
-    <!-- popup buttons -->
-    <div id="vinyl-menu">
-      <button class="vinyl-btn" id="btn-playpause" title="ເລີ່ນ / ຢຸດ">▶</button>
-      <button class="vinyl-btn" id="btn-stop"      title="ຢຸດເພງ">⏹</button>
-      <button class="vinyl-btn" id="btn-mute"      title="ປິດສຽງ / ເປີດສຽງ">🔊</button>
-    </div>
-
-    <!-- the record disc -->
-    <div id="vinyl-disc" title="ກົດເພື່ອເປີດເມນູ"></div>
-    <div id="vinyl-tip">ເພງ</div>
-  </div>
-
-  <script>
-    (function () {
-      var disc    = document.getElementById('vinyl-disc');
-      var menu    = document.getElementById('vinyl-menu');
-      var tip     = document.getElementById('vinyl-tip');
-      var btnPP   = document.getElementById('btn-playpause');
-      var btnStop = document.getElementById('btn-stop');
-      var btnMute = document.getElementById('btn-mute');
-      var audio   = document.getElementById('wedding-music');
-      var menuOpen = false;
-      var muted    = false;
-
-      function setSpinning(on) {
-        on ? disc.classList.add('spinning') : disc.classList.remove('spinning');
-      }
-      function updateUI() {
-        if (!audio.paused) {
-          btnPP.textContent = '⏸';
-          btnPP.title = 'Pause';
-          setSpinning(true);
-          tip.textContent = '♪ ກຳລັງເລີ່ນ';
-        } else {
-          btnPP.textContent = '▶';
-          btnPP.title = 'Play';
-          setSpinning(false);
-          tip.textContent = 'ເພງ';
-        }
-        btnMute.textContent = muted ? '🔇' : '🔊';
-      }
-
-      /* toggle menu on disc click */
-      disc.addEventListener('click', function (e) {
-        e.stopPropagation();
-        menuOpen = !menuOpen;
-        menu.classList.toggle('open', menuOpen);
-      });
-
-      /* close menu when clicking outside */
-      document.addEventListener('click', function () {
-        menuOpen = false;
-        menu.classList.remove('open');
-      });
-      menu.addEventListener('click', function (e) { e.stopPropagation(); });
-
-      /* play / pause */
-      btnPP.addEventListener('click', function () {
-        if (audio.paused) {
-          audio.play().catch(function(){});
-        } else {
-          audio.pause();
-        }
-        updateUI();
-      });
-
-      /* stop */
-      btnStop.addEventListener('click', function () {
-        audio.pause();
-        audio.currentTime = 25;
-        updateUI();
-      });
-
-      /* mute */
-      btnMute.addEventListener('click', function () {
-        muted = !muted;
-        audio.muted = muted;
-        updateUI();
-      });
-
-      /* sync UI when audio state changes externally */
-      audio.addEventListener('play',  updateUI);
-      audio.addEventListener('pause', updateUI);
-
-      updateUI();
-    })();
-  </script>
-  <!-- ===== END VINYL RECORD PLAYER ===== -->
-
-
   <!-- Begin Preloader -->
   <div class="preloader-wrapper">
     <div class="preloader">
@@ -529,116 +285,7 @@
             alt="Bismillahirrahmaanirrahiim">
         </div>
 
-        <!-- ====== Responsive Family Section ====== -->
-        <style>
-          .family-section-top {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 0;
-            position: relative;
-            padding-bottom: 20px;
-          }
 
-          .family-col {
-            flex: 1;
-            text-align: center;
-            padding: 0 16px;
-            min-width: 0;
-          }
-
-          .family-col-center {
-            flex: 0 0 80px;
-            min-width: 60px;
-          }
-
-          .family-heading {
-            font-weight: 700;
-            color: #996E6D;
-            font-size: clamp(0.42rem, 1.9vw, 0.95rem);
-            margin-bottom: 8px;
-            white-space: nowrap;
-            text-align: center;
-          }
-
-          .family-names-list {
-            display: inline-block;
-            text-align: left;
-            font-size: clamp(0.38rem, 1.5vw, 0.82rem);
-            color: #333;
-            white-space: nowrap;
-          }
-
-          .family-names-list span {
-            display: block;
-            line-height: 2;
-          }
-
-          .family-names-wrap {
-            text-align: center;
-          }
-
-          .divider-line {
-            border-top: 1px solid #D8A9A8;
-            margin: 0 12px;
-          }
-
-          .st-float-wrap {
-            position: absolute;
-            left: 50%;
-            bottom: -42px;
-            transform: translateX(-50%);
-            z-index: 10;
-            background: white;
-            padding: 0 6px;
-          }
-
-          .family-section-bottom {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin-top: 52px;
-            gap: 0;
-          }
-
-          .couple-col {
-            flex: 1;
-            text-align: center;
-            min-width: 0;
-            padding: 0 4px;
-          }
-
-          .couple-name-text {
-            font-family: 'Noto Serif Lao', serif;
-            font-size: clamp(0.65rem, 2.8vw, 1.5rem);
-            color: #996E6D;
-            line-height: 1.3;
-            white-space: nowrap;
-          }
-
-          .couple-nick {
-            font-weight: bold;
-            font-size: clamp(0.65rem, 2.2vw, 1rem);
-            color: #996E6D;
-            margin: 3px 0;
-          }
-
-          .couple-role {
-            font-style: italic;
-            font-size: clamp(0.6rem, 1.8vw, 0.9rem);
-            color: #555;
-          }
-
-          .couple-logo-col {
-            flex: 0 0 clamp(60px, 12vw, 110px);
-            min-width: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-        </style>
 
         <div style="position: relative;">
           <!-- แถวบน: เจ้าภาพ -->
@@ -680,19 +327,22 @@
         <!-- แถวล่าง: ชื่อเจ้าบ่าว-เจ้าสาว -->
         <div class="family-section-bottom">
           <div class="couple-col" data-aos="fade-right">
-            <div class="couple-name-text">ທ້າວ ແອນດີ້ ຄຳບຸນມີ</div>
-            <p class="couple-nick">( ເອັນ )</p>
+            <div class="couple-name-text">ທ້າວ ສຸກປະເສີດ ຫົງວັນຄຳ</div>
+            <p class="couple-nick">( ເອັວ )</p>
             <p class="couple-role">ຜູ້ເປັນລູກ ແລະ ຫຼານຊາຍ</p>
           </div>
           <div class="couple-logo-col">
             <img src="image/ST_transparent.png" style="width: clamp(55px, 11vw, 110px); height: auto;" alt="S&T">
           </div>
           <div class="couple-col" data-aos="fade-left">
-            <div class="couple-name-text">ນ. ຕິກພະຈັນ ກິ່ນພະຄອນ</div>
-            <p class="couple-nick">( ໂບນັດ )</p>
+            <div class="couple-name-text">ນ. ຕິກພະຈັນ ບົວສີ</div>
+            <p class="couple-nick">( ຕຶກ )</p>
             <p class="couple-role">ຜູ້ເປັນລູກ ແລະ ຫຼານສາວ</p>
           </div>
         </div>
+
+        <div class="space40px"></div>
+        <div class="space40px"></div>
 
         <div class="has-text-centered" style="padding-top: 16px;">
           <img src="image/divider-leaves.png" class="divider" alt="~~~">
@@ -1069,24 +719,46 @@
     AOS.init({
       easing: "ease-out",
       duration: 800,
+      once: true,   /* เพิ่มบรรทัดนี้: บังคับให้แอนิเมชันเล่นแค่ครั้งเดียว จะได้ไม่เด้งไปมา */
+      offset: 50    /* เพิ่มบรรทัดนี้: ให้แอนิเมชันเริ่มทำงานเร็วขึ้น ไม่ไปกวนกับปุ่มหัวใจ */
     });
 
     // ฟังก์ชันสำหรับเลื่อนหน้าจออัตโนมัติ
+    // ฟังก์ชันสำหรับเลื่อนหน้าจออัตโนมัติ (เวอร์ชันสมูทขั้นสุด ไม่กระตุก)
     function startAutoScroll() {
-      var speed = 1; // ปรับความเร็วที่นี่ (0.5 คือช้าๆ นุ่มนวล)
-      var scrollInterval = setInterval(function () {
-        window.scrollBy(0, speed);
+      var speed = 0.3; // ปรับความเร็วตรงนี้ได้ครับ (ยิ่งค่าน้อยยิ่งช้าและนุ่มนวล)
+      var currentY = window.scrollY;
+      var isScrolling = true;
 
-        // หยุดเมื่อถึงท้ายเว็บ
-        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-          clearInterval(scrollInterval);
+      function step() {
+        // ถ้าแขกแตะหน้าจอแล้ว ให้หยุดทำงานทันที
+        if (!isScrolling) return;
+
+        currentY += speed;
+        window.scrollTo(0, currentY);
+
+        // ตรวจสอบว่าเลื่อนถึงท้ายเว็บหรือยัง
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          isScrolling = false;
+        } else {
+          // สั่งให้เลื่อนต่อไปเรื่อยๆ แบบนุ่มนวลไปกับเฟรมเรทหน้าจอ
+          requestAnimationFrame(step);
         }
-      }, 30);
+      }
 
-      // หยุดเลื่อนถ้าผู้ใช้ขยับหน้าจอเอง
-      var stopScroll = function () { clearInterval(scrollInterval); };
-      window.addEventListener("wheel", stopScroll);
-      window.addEventListener("touchstart", stopScroll);
+      // เริ่มต้นทำงาน
+      requestAnimationFrame(step);
+
+      // ฟังก์ชันสำหรับสั่งหยุดเลื่อน
+      var stopScroll = function () {
+        isScrolling = false;
+      };
+
+      // หยุดเลื่อนทันทีเมื่อแขกทำสิ่งเหล่านี้: เลื่อนจอเอง, เอานิ้วแตะจอ, หรือคลิก
+      window.addEventListener("wheel", stopScroll, { passive: true });
+      window.addEventListener("touchstart", stopScroll, { passive: true });
+      window.addEventListener("touchmove", stopScroll, { passive: true });
+      window.addEventListener("click", stopScroll, { passive: true });
     }
 
     // เมื่อโหลดหน้าเว็บและ Preloader หายไปให้เริ่มทำงานทันที
@@ -1213,6 +885,254 @@
     document.addEventListener('click', playWithFadeIn, { once: true });
     document.addEventListener('touchstart', playWithFadeIn, { once: true });
   </script>
+
+
+  <!-- ===== HEART MUSIC BUTTON ===== -->
+  <style>
+    /* ── wrapper: fixed, always visible, above everything ── */
+    #hrt-wrap {
+      position: fixed;
+      bottom: 24px;
+      left: 20px;
+      z-index: 2147483647;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: auto;
+    }
+
+    /* ── popup mini-controls ── */
+    #hrt-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity .28s ease, transform .28s ease;
+    }
+
+    #hrt-controls.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .hc-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: .95rem;
+      box-shadow: 0 3px 12px rgba(153, 110, 109, .35);
+      background: rgba(255, 255, 255, .92);
+      color: #996E6D;
+      backdrop-filter: blur(8px);
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .hc-btn:hover {
+      transform: scale(1.18);
+      box-shadow: 0 5px 18px rgba(153, 110, 109, .5);
+    }
+
+    /* ── main heart button ── */
+    #hrt-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff8fab, #ff4d88, #e8336d);
+      color: white;
+      font-size: 1.35rem;
+      line-height: 1;
+      box-shadow:
+        0 0 0 0 rgba(255, 105, 150, .5),
+        0 6px 20px rgba(232, 51, 109, .4);
+      /* pulse when playing */
+      animation: hrt-idle 2.5s ease-in-out infinite;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: visible;
+    }
+
+    #hrt-btn:hover {
+      transform: scale(1.12);
+    }
+
+    /* ripple ring */
+    #hrt-btn::before,
+    #hrt-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 105, 150, .45);
+      animation: hrt-ring 2s ease-out infinite;
+    }
+
+    #hrt-btn::after {
+      animation-delay: .8s;
+    }
+
+    @keyframes hrt-ring {
+      0% {
+        transform: scale(1);
+        opacity: .6;
+      }
+
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    /* idle gentle beat */
+    @keyframes hrt-idle {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.15);
+      }
+
+      28% {
+        transform: scale(1);
+      }
+
+      42% {
+        transform: scale(1.1);
+      }
+
+      70% {
+        transform: scale(1);
+      }
+    }
+
+    /* stronger pulse when playing */
+    @keyframes hrt-play {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 105, 150, .55), 0 6px 20px rgba(232, 51, 109, .4);
+      }
+
+      50% {
+        transform: scale(1.18);
+        box-shadow: 0 0 0 14px rgba(255, 105, 150, 0), 0 10px 30px rgba(232, 51, 109, .55);
+      }
+    }
+
+    #hrt-btn.playing {
+      animation: hrt-play .8s ease-in-out infinite;
+    }
+
+    /* label */
+    #hrt-label {
+      font-size: .6rem;
+      color: #996E6D;
+      background: rgba(255, 255, 255, .9);
+      padding: 2px 7px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(153, 110, 109, .15);
+      letter-spacing: .4px;
+      backdrop-filter: blur(4px);
+    }
+  </style>
+
+  <script>
+    (function () {
+      var audio = document.getElementById('wedding-music');
+      var open = false;
+      var muted = false;
+
+      var wrap = document.createElement('div');
+      wrap.id = 'hrt-wrap';
+      wrap.innerHTML =
+        '<div id="hrt-controls">' +
+        '<button class="hc-btn" id="hc-stop"  title="ຢຸດ">⏹</button>' +
+        '<button class="hc-btn" id="hc-mute"  title="ປິດສຽງ">🔊</button>' +
+        '</div>' +
+        '<button id="hrt-btn" title="ກົດເພື່ອເປີດ/ປິດ">❤️</button>' +
+        '<div id="hrt-label">ເພງ</div>';
+
+      // Mount as sibling of <body> inside <html>
+      function mount() {
+        document.documentElement.appendChild(wrap);
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', mount);
+      } else {
+        mount();
+      }
+
+      // Re-grab refs after mount
+      function init() {
+        var btn = document.getElementById('hrt-btn');
+        var ctrl = document.getElementById('hrt-controls');
+        var label = document.getElementById('hrt-label');
+        var stop = document.getElementById('hc-stop');
+        var mute = document.getElementById('hc-mute');
+
+        function ui() {
+          if (!audio.paused) {
+            btn.classList.add('playing');
+            label.textContent = '♪ ກຳລັງເລີ່ນ';
+          } else {
+            btn.classList.remove('playing');
+            label.textContent = 'ເພງ';
+          }
+          mute.textContent = muted ? '🔇' : '🔊';
+        }
+
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          open = !open;
+          ctrl.classList.toggle('show', open);
+          // also toggle play/pause
+          if (audio.paused) {
+            audio.play().catch(function () { });
+          } else {
+            audio.pause();
+          }
+          ui();
+        });
+
+        stop.addEventListener('click', function (e) {
+          e.stopPropagation();
+          audio.pause(); audio.currentTime = 25; ui();
+        });
+
+        mute.addEventListener('click', function (e) {
+          e.stopPropagation();
+          muted = !muted; audio.muted = muted; ui();
+        });
+
+        document.addEventListener('click', function () {
+          open = false; ctrl.classList.remove('show');
+        });
+
+        audio.addEventListener('play', ui);
+        audio.addEventListener('pause', ui);
+        ui();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+  <!-- ===== END HEART MUSIC BUTTON ===== -->
 
 </body>
 
