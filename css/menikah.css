@@ -704,7 +704,7 @@ ul#hitungmundur li.separator {
 }
 
 .family-col-name {
-  font-size: clamp(9px, 2.3vw, 13px);
+  font-size: clamp(12px, 2.3vw, 18px);
   color: #555;
   line-height: 1.9;
   margin: 0;
